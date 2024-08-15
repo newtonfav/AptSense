@@ -9,10 +9,10 @@ export default async function Navigation() {
       >
         <li className="midPhone:mb-2">
           <Link
-            href="/questions"
+            href="/test"
             className="hover:text-accent-400 transition-colors midPhone:mr-6"
           >
-            Questions
+            Aptitude Tests
           </Link>
         </li>
         <li className="midPhone:mb-2">
