@@ -3,6 +3,12 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/header";
 
+// import { Jomhuria } from "next/font/google";
+// const jomhuria = Jomhuria({
+//   subsets: ["latin"],
+//   weight: "400",
+// });
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

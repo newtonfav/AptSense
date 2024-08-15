@@ -9,7 +9,7 @@ import option4 from "@/public/option4.svg";
 
 export default function Options() {
   const [isCorrect, setisCorrect] = useState(false);
-  const [isAnswered, setisAnswered] = useState(false);
+  const [isAnswered, setisAnswered] = useState(true);
 
   return (
     <form action="">
