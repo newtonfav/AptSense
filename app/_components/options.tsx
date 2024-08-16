@@ -2,47 +2,30 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import option1 from "@/public/option1.svg";
-import option2 from "@/public/option2.svg";
-import option3 from "@/public/option3.svg";
-import option4 from "@/public/option4.svg";
 
-export default function Options() {
+interface OptionsProps {
+  options: any[];
+  questionId: string;
+}
+
+export default function Options({ options, questionId }: OptionsProps) {
   const [isCorrect, setisCorrect] = useState(false);
-  const [isAnswered, setisAnswered] = useState(true);
+  const [isAnswered, setisAnswered] = useState(false);
 
   return (
     <form action="">
       <fieldset className="items-center flex flex-col">
         <div className="inline-flex gap-4 mb-12">
-          <Option
-            image={option1}
-            alt={"option1"}
-            id={"option1"}
-            value={"option1"}
-            name={"question1"}
-          />
-          <Option
-            image={option2}
-            alt={"option2"}
-            id={"option2"}
-            value={"option2"}
-            name={"question1"}
-          />
-          <Option
-            image={option3}
-            alt={"option3"}
-            id={"option3"}
-            value={"option3"}
-            name={"question1"}
-          />
-          <Option
-            image={option4}
-            alt={"option4"}
-            id={"option4"}
-            value={"option4"}
-            name={"question1"}
-          />
+          {options.map((option, index) => (
+            <Option
+              image={option.image}
+              alt={"aptitude test option"}
+              value={index}
+              name={questionId}
+              key={option.id}
+              id={option.id}
+            />
+          ))}
         </div>
         {!isAnswered ? (
           <Button text="Submit" type={"submit"} />
@@ -64,7 +47,7 @@ function Option({
   alt: string;
   image: any;
   id: string;
-  value: string;
+  value: number;
   name: string;
 }) {
   return (
@@ -77,7 +60,7 @@ function Option({
         className="w-[1.2rem] h-[1.2rem] self-center appearance-none border border-primary-400 rounded-full bg-white checked:bg-primary-400 checked:ring-1 checked:ring-offset-2 checked:ring-primary-400 cursor-pointer"
       />
       <label htmlFor={id}>
-        <Image src={image} alt={alt} width={90} />
+        <Image src={image} alt={alt} width={90} height={90} />
       </label>
     </div>
   );

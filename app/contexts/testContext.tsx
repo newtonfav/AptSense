@@ -1,19 +1,28 @@
-import { createContext, ReactNode, useContext, useReducer } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useReducer,
+} from "react";
 
 interface InitialState {
-  questions: string | any[];
+  questions: any[];
   index: number;
   points: number;
   answer: number | null;
   isLoading: boolean;
+  error: string;
   streak: number;
   highscore: number;
+  numQuestions: number;
   secondsRemaining: number | null;
   status: "ready" | "active" | "error" | "finished" | "loading";
 }
 
 interface TestContextType extends InitialState {
-  startTest: () => void;
+  startTest: (data: any[]) => void;
+  dispatch: Dispatch<Action>;
 }
 
 interface Action {
@@ -29,8 +38,10 @@ const initialState: InitialState = {
   status: "loading", //ready, active, error, finished, loading
   index: 0,
   answer: 0,
+  numQuestions: 0,
   points: 0,
   highscore: 0,
+  error: "",
   streak: 0,
   secondsRemaining: null,
 };
@@ -41,16 +52,30 @@ function reducer(state: InitialState, action: Action): InitialState {
   switch (action.type) {
     case "loading":
       return { ...state, isLoading: true };
-    case "dataReceived":
-      return { ...state, questions: action.payload, status: "ready" };
-    case "dataFailed":
-      return { ...state, status: "error" };
-    case "start":
+
+    case "question/loaded":
+      return {
+        ...state,
+        questions: action.payload,
+        numQuestions: action.payload.length,
+        status: "ready",
+      };
+
+    case "rejected":
+      return {
+        ...state,
+        status: "error",
+        isLoading: false,
+        error: action.payload,
+      };
+
+    case "question/start":
       return {
         ...state,
         status: "active",
         secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
+
     case "newAnswer":
       const question = state.questions.at(state.index);
 
@@ -63,8 +88,12 @@ function reducer(state: InitialState, action: Action): InitialState {
             : state.points,
       };
 
-    case "nextQuestion":
+    case "question/next":
       return { ...state, index: state.index + 1, answer: null };
+
+    case "question/prev":
+      return { ...state, index: state.index - 1, answer: null };
+
     case "finish":
       return {
         ...state,
@@ -72,8 +101,10 @@ function reducer(state: InitialState, action: Action): InitialState {
         highscore:
           state.points > state.highscore ? state.points : state.highscore,
       };
+
     case "restart":
       return { ...initialState, status: "ready", questions: state.questions };
+
     case "tick":
       return {
         ...state,
@@ -84,7 +115,7 @@ function reducer(state: InitialState, action: Action): InitialState {
       };
 
     default:
-      return initialState;
+      return state;
   }
 }
 
@@ -94,9 +125,11 @@ function TestProvider({ children }: { children: ReactNode }) {
       questions,
       status,
       index,
+      error,
       answer,
       points,
       highscore,
+      numQuestions,
       isLoading,
       streak,
       secondsRemaining,
@@ -104,16 +137,19 @@ function TestProvider({ children }: { children: ReactNode }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  async function startTest() {
-    dispatch({ type: "loading" });
+  function startTest(data: any) {
+    dispatch({ type: "question/loaded", payload: data });
   }
 
   return (
     <TestContext.Provider
       value={{
         questions,
+        dispatch,
         isLoading,
+        error,
         startTest,
+        numQuestions,
         status,
         index,
         answer,

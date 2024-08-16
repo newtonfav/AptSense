@@ -1,13 +1,9 @@
-"use client";
 import StartScreen from "../_components/start-screen";
-import { TestProvider } from "../contexts/testContext";
 
-export default function AptitudeTest() {
+export default async function AptitudeTest() {
   return (
     <div>
-      <TestProvider>
-        <StartScreen />
-      </TestProvider>
+      <StartScreen />
     </div>
   );
 }

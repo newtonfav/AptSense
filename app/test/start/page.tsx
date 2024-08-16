@@ -1,14 +1,21 @@
-"use client";
 import Test from "@/app/_components/test";
-import { TestProvider } from "@/app/contexts/testContext";
+import { getQuestions } from "@/app/_lib/db/questions";
 import React from "react";
+import Questions from "@/app/_components/questions";
 
-export default function Start() {
+export interface Question {
+  id: string;
+  task: string;
+  options: any[];
+  image: string;
+}
+
+export default async function Start() {
+  const questions: Question[] = await getQuestions();
+
   return (
     <div>
-      <TestProvider>
-        <Test />
-      </TestProvider>
+      <Questions questions={questions} />
     </div>
   );
 }
