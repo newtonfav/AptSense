@@ -7,9 +7,8 @@ import Progress from "./progress";
 import { useTest } from "../contexts/testContext";
 
 export default function TestComponent() {
-  const { index, questions, points, numQuestions, answer } = useTest();
-
-  const maxPoints = questions.reduce((acc, cur) => acc + cur.points, 0);
+  const { index, questions, points, maxPoints, numQuestions, answer } =
+    useTest();
 
   return (
     <div className="flex flex-col">

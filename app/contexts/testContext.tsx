@@ -4,6 +4,7 @@ import {
   ReactNode,
   useContext,
   useReducer,
+  useState,
 } from "react";
 
 interface InitialState {
@@ -13,6 +14,9 @@ interface InitialState {
   answer: number | null;
   isLoading: boolean;
   error: string;
+  maxPoints: number;
+  isFlipped: boolean;
+  isAnswered: boolean;
   streak: number;
   highscore: number;
   numQuestions: number;
@@ -23,6 +27,11 @@ interface InitialState {
 interface TestContextType extends InitialState {
   startTest: (data: any[]) => void;
   dispatch: Dispatch<Action>;
+  isAnswered: boolean;
+  isCorrect: boolean;
+  submitAnswer: (selectedOption: number, index: number) => void;
+  showFeedback: () => void;
+  isFlipped: boolean;
 }
 
 interface Action {
@@ -39,6 +48,9 @@ const initialState: InitialState = {
   index: 0,
   answer: 0,
   numQuestions: 0,
+  isFlipped: false,
+  maxPoints: 0,
+  isAnswered: false,
   points: 0,
   highscore: 0,
   error: "",
@@ -59,6 +71,10 @@ function reducer(state: InitialState, action: Action): InitialState {
         questions: action.payload,
         numQuestions: action.payload.length,
         status: "ready",
+        maxPoints: action.payload.reduce(
+          (acc: number, cur: { points: any }) => acc + cur.points,
+          0
+        ),
       };
 
     case "rejected":
@@ -76,7 +92,7 @@ function reducer(state: InitialState, action: Action): InitialState {
         secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
 
-    case "newAnswer":
+    case "question/newAnswer":
       const question = state.questions.at(state.index);
 
       return {
@@ -86,10 +102,20 @@ function reducer(state: InitialState, action: Action): InitialState {
           action.payload === question.correctOption
             ? state.points + question.points
             : state.points,
+        isAnswered: true,
       };
 
+    case "question/feedback":
+      return { ...state, isFlipped: true };
+
     case "question/next":
-      return { ...state, index: state.index + 1, answer: null };
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+        isAnswered: false,
+        isFlipped: false,
+      };
 
     case "question/prev":
       return { ...state, index: state.index - 1, answer: null };
@@ -103,7 +129,12 @@ function reducer(state: InitialState, action: Action): InitialState {
       };
 
     case "restart":
-      return { ...initialState, status: "ready", questions: state.questions };
+      return {
+        ...initialState,
+        status: "ready",
+        questions: state.questions,
+        isAnswered: false,
+      };
 
     case "tick":
       return {
@@ -127,6 +158,9 @@ function TestProvider({ children }: { children: ReactNode }) {
       index,
       error,
       answer,
+      maxPoints,
+      isAnswered,
+      isFlipped,
       points,
       highscore,
       numQuestions,
@@ -137,8 +171,23 @@ function TestProvider({ children }: { children: ReactNode }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
+  const [isCorrect, setIsCorrect] = useState(false);
+
   function startTest(data: any) {
     dispatch({ type: "question/loaded", payload: data });
+  }
+
+  function submitAnswer(selectedOption: number, index: number) {
+    const currentQuestion = questions[index];
+
+    if (currentQuestion.correctOption === selectedOption) {
+      setIsCorrect(true);
+    }
+    dispatch({ type: "question/newAnswer", payload: selectedOption });
+  }
+
+  function showFeedback() {
+    dispatch({ type: "question/feedback" });
   }
 
   return (
@@ -150,10 +199,16 @@ function TestProvider({ children }: { children: ReactNode }) {
         error,
         startTest,
         numQuestions,
+        submitAnswer,
         status,
         index,
         answer,
+        isCorrect,
+        isAnswered,
+        showFeedback,
+        isFlipped,
         points,
+        maxPoints,
         highscore,
         streak,
         secondsRemaining,

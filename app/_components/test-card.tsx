@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import question from "@/public/question.svg";
 import Options from "./options";
+import { useTest } from "../contexts/testContext";
 
 interface TestCardProps {
   questions: any[];
@@ -10,11 +10,13 @@ interface TestCardProps {
 
 export default function TestCard({ questions, index }: TestCardProps) {
   const question = questions[index];
+  const correctOption = question.options[question.correctOption];
+  const { isFlipped } = useTest();
 
   return (
     <div className="bg-primary-200 p-10 rounded-[0.75rem] space-y-4 flex flex-col items-center select-none mb-8">
       <div>{question.task}</div>
-      <div>
+      <div className="inline-flex gap-4 items-center">
         <Image
           src={question.image}
           alt={"aptitude image"}
@@ -23,8 +25,24 @@ export default function TestCard({ questions, index }: TestCardProps) {
           width={350}
           height={88}
         />
+        {isFlipped && (
+          <div className="border-4 border-primary-400 mb-[2rem]">
+            <Image
+              src={correctOption.image}
+              alt={"correctOption"}
+              className="p-1"
+              width={88}
+              height={88}
+            />
+          </div>
+        )}
       </div>
-      <Options options={question.options} questionId={question.id} />
+      <Options
+        options={question.options}
+        questionId={question.id}
+        index={index}
+        question={question}
+      />
     </div>
   );
 }
