@@ -24,7 +24,7 @@ progress {
     width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid theme("colors.primary.400");
+    border: 8px solid theme("colors.primary.100");
     border-right-color: theme("colors.primary.200");
     animation: rotate 1s infinite linear;
   }
@@ -34,7 +34,7 @@ progress {
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid theme("colors.primary.400");
+    border: 2px solid #d1d5db;
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }

@@ -1,8 +1,10 @@
+import { stat } from "fs";
 import {
   createContext,
   Dispatch,
   ReactNode,
   useContext,
+  useMemo,
   useReducer,
   useState,
 } from "react";
@@ -16,7 +18,9 @@ interface InitialState {
   error: string;
   maxPoints: number;
   isFlipped: boolean;
+  solution: string;
   isAnswered: boolean;
+  timerIsPaused: boolean;
   streak: number;
   highscore: number;
   numQuestions: number;
@@ -29,7 +33,11 @@ interface TestContextType extends InitialState {
   dispatch: Dispatch<Action>;
   isAnswered: boolean;
   isCorrect: boolean;
-  submitAnswer: (selectedOption: number, index: number) => void;
+  submitAnswer: (
+    selectedOption: number,
+    index: number,
+    solution: string
+  ) => void;
   showFeedback: () => void;
   isFlipped: boolean;
 }
@@ -48,9 +56,11 @@ const initialState: InitialState = {
   index: 0,
   answer: 0,
   numQuestions: 0,
+  timerIsPaused: false,
   isFlipped: false,
   maxPoints: 0,
   isAnswered: false,
+  solution: "",
   points: 0,
   highscore: 0,
   error: "",
@@ -89,6 +99,8 @@ function reducer(state: InitialState, action: Action): InitialState {
       return {
         ...state,
         status: "active",
+        isAnswered: false,
+        timerIsPaused: false,
         secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
 
@@ -99,10 +111,12 @@ function reducer(state: InitialState, action: Action): InitialState {
         ...state,
         answer: action.payload,
         points:
-          action.payload === question.correctOption
+          action.payload.selectedOption === question.correctOption
             ? state.points + question.points
             : state.points,
         isAnswered: true,
+        timerIsPaused: true,
+        solution: action.payload.solution,
       };
 
     case "question/feedback":
@@ -114,7 +128,9 @@ function reducer(state: InitialState, action: Action): InitialState {
         index: state.index + 1,
         answer: null,
         isAnswered: false,
+        timerIsPaused: false,
         isFlipped: false,
+        secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
 
     case "question/prev":
@@ -132,8 +148,12 @@ function reducer(state: InitialState, action: Action): InitialState {
       return {
         ...initialState,
         status: "ready",
-        questions: state.questions,
-        isAnswered: false,
+        maxPoints: action.payload.reduce(
+          (acc: number, cur: { points: any }) => acc + cur.points,
+          0
+        ),
+        numQuestions: action.payload.length,
+        questions: action.payload,
       };
 
     case "tick":
@@ -158,9 +178,11 @@ function TestProvider({ children }: { children: ReactNode }) {
       index,
       error,
       answer,
+      solution,
       maxPoints,
       isAnswered,
       isFlipped,
+      timerIsPaused,
       points,
       highscore,
       numQuestions,
@@ -177,46 +199,56 @@ function TestProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "question/loaded", payload: data });
   }
 
-  function submitAnswer(selectedOption: number, index: number) {
+  function submitAnswer(
+    selectedOption: number,
+    index: number,
+    solution: string
+  ) {
     const currentQuestion = questions[index];
 
     if (currentQuestion.correctOption === selectedOption) {
       setIsCorrect(true);
     }
-    dispatch({ type: "question/newAnswer", payload: selectedOption });
+
+    dispatch({
+      type: "question/newAnswer",
+      payload: { selectedOption, solution },
+    });
   }
 
   function showFeedback() {
     dispatch({ type: "question/feedback" });
   }
 
-  return (
-    <TestContext.Provider
-      value={{
-        questions,
-        dispatch,
-        isLoading,
-        error,
-        startTest,
-        numQuestions,
-        submitAnswer,
-        status,
-        index,
-        answer,
-        isCorrect,
-        isAnswered,
-        showFeedback,
-        isFlipped,
-        points,
-        maxPoints,
-        highscore,
-        streak,
-        secondsRemaining,
-      }}
-    >
-      {children}
-    </TestContext.Provider>
+  const value = useMemo(
+    () => ({
+      questions,
+      dispatch,
+      isLoading,
+      error,
+      startTest,
+      numQuestions,
+      submitAnswer,
+      solution,
+      status,
+      index,
+      answer,
+      isCorrect,
+      timerIsPaused,
+      isAnswered,
+      showFeedback,
+      isFlipped,
+      points,
+      maxPoints,
+      highscore,
+      streak,
+      secondsRemaining,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [secondsRemaining, dispatch, status, isFlipped]
   );
+
+  return <TestContext.Provider value={value}>{children}</TestContext.Provider>;
 }
 
 function useTest() {

@@ -2,7 +2,7 @@ import React, { use } from "react";
 import { useTest } from "../contexts/testContext";
 
 export default function FinishedScreen() {
-  const { points, maxPoints, highscore, dispatch } = useTest();
+  const { points, maxPoints, highscore, dispatch, questions } = useTest();
 
   const percentage = (points / maxPoints) * 100;
 
@@ -25,7 +25,7 @@ export default function FinishedScreen() {
 
       <button
         className="bg-primary-400 px-5 py-2 text-white rounded-[0.75rem] hover:bg-primary-500"
-        onClick={() => dispatch({ type: "restart" })}
+        onClick={() => dispatch({ type: "restart", payload: questions })}
       >
         Restart Test
       </button>

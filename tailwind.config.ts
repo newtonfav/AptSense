@@ -52,6 +52,19 @@ const config: Config = {
         smallestPhone: { max: "328px" },
         //=> @media (max-width: 320px) { ... }
       },
+      keyframes: {
+        rotate: {
+          to: { transform: "rotate(1turn)" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        rotate: "rotate 1s infinite linear",
+        "spin-slow": "spin-slow 12s linear infinite",
+      },
     },
   },
   plugins: [],
