@@ -7,12 +7,20 @@ import { useTest } from "../contexts/testContext";
 export default function Solution() {
   const { solution, index, numQuestions, dispatch } = useTest();
 
+  // const correctAnswer = questions[index].correctOption;
+
+  // const options = ["A", "B", "C", "D"];
+
   return (
     <div className="text-wrap text-sm flex flex-col w-[33rem] h-[12rem]">
       <div className="font-semibold text-base">Explanation</div>
       <MemoizedReactMarkdown remarkPlugins={[remarkGfm, remarkMath]}>
         {solution}
       </MemoizedReactMarkdown>
+      {/* <div>
+        The correct option is{" "}
+        <span className="font-bold">{options[correctAnswer]}</span>
+      </div> */}
 
       <div className="self-center mt-6">
         {index === numQuestions - 1 ? (

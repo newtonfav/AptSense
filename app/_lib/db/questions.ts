@@ -4,8 +4,7 @@ import { supabase } from "./supabase";
 export const getQuestions = async function () {
   const { data, error } = await supabase
     .from("questions")
-    .select("id, task, options, image, points, correctOption, fullQuestion")
-    .order("task");
+    .select("id, task, options, image, points, correctOption, fullQuestion");
 
   if (error) {
     console.error(error);
@@ -21,8 +20,6 @@ export const getQuestionById = async function (id: number) {
     .from("questions")
     .select("fullQuestion, task")
     .eq("id", id);
-
-  console.log("data", data);
 
   if (error) {
     console.error(error);

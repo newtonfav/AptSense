@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import {
   createContext,
   Dispatch,
@@ -101,6 +100,7 @@ function reducer(state: InitialState, action: Action): InitialState {
         status: "active",
         isAnswered: false,
         timerIsPaused: false,
+        isFlipped: false,
         secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
       };
 
