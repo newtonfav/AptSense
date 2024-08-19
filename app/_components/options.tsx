@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTest } from "../contexts/testContext";
 import { useActions } from "ai/rsc";
 import SpinnerMini from "./spinner-mini";
@@ -19,9 +19,22 @@ export default function Options({
   index,
   question,
 }: OptionsProps) {
-  const { isCorrect, isAnswered, showFeedback, submitAnswer } = useTest();
+  const {
+    isCorrect,
+    dispatch,
+    isAnswered,
+    showFeedback,
+    answer,
+    submitAnswer,
+  } = useTest();
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const { explainLogic } = useActions();
   const [pending, setPending] = useState(false);
+  const correctOption = question.correctOption;
+
+  useEffect(() => {
+    setSelectedOption(null);
+  }, [answer]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,11 +70,17 @@ export default function Options({
               name={questionId}
               key={option.id}
               id={option.id}
+              // checked={isAnswered && index === correctOption}
             />
           ))}
         </div>
         {!isAnswered ? (
-          <Button text="Submit" type={"submit"} pending={pending} />
+          <Button
+            text="Submit"
+            type={"submit"}
+            pending={pending}
+            disabled={selectedOption === null}
+          />
         ) : (
           <Feedback
             isCorrect={isCorrect}
@@ -72,47 +91,50 @@ export default function Options({
       </fieldset>
     </form>
   );
-}
 
-function Option({
-  image,
-  alt,
-  id,
-  value,
-  name,
-}: {
-  alt: string;
-  image: any;
-  id: string;
-  value: number;
-  name: string;
-}) {
-  return (
-    <div className="inline-flex gap-3">
-      <input
-        type="radio"
-        id={id}
-        name={name}
-        value={value}
-        className="w-[1.2rem] h-[1.2rem] self-center appearance-none border border-primary-400 rounded-full bg-white checked:bg-primary-400 checked:ring-1 checked:ring-offset-2 checked:ring-primary-400 cursor-pointer"
-      />
-      <label htmlFor={id}>
-        <Image
-          src={image}
-          alt={alt}
-          width={90}
-          height={90}
-          quality={100}
-          priority
+  function Option({
+    image,
+    alt,
+    id,
+    value,
+    name,
+  }: {
+    alt: string;
+    image: any;
+    id: string;
+    value: number;
+    name: string;
+  }) {
+    return (
+      <div className="inline-flex gap-3">
+        <input
+          type="radio"
+          id={id}
+          name={name}
+          checked={selectedOption === value}
+          onChange={() => setSelectedOption(value)}
+          value={value}
+          className="w-[1.2rem] h-[1.2rem] self-center appearance-none border border-primary-400 rounded-full bg-white checked:bg-primary-400 checked:ring-1 checked:ring-offset-2 checked:ring-primary-400 cursor-pointer"
         />
-      </label>
-    </div>
-  );
+        <label htmlFor={id}>
+          <Image
+            src={image}
+            alt={alt}
+            width={90}
+            height={90}
+            quality={100}
+            priority
+          />
+        </label>
+      </div>
+    );
+  }
 }
 
 function Button({
   text,
   type,
+  disabled,
   pending,
   handleClick,
 }: {
@@ -120,13 +142,14 @@ function Button({
   type: undefined | "button" | "reset" | "submit";
   handleClick?: (e: any) => void;
   pending: boolean;
+  disabled?: boolean;
 }) {
   return (
     <button
       className="bg-primary-400 px-8 py-2 text-sm text-primary-200 rounded-[0.7rem] mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
       onClick={handleClick}
       type={type}
-      disabled={pending}
+      disabled={pending || disabled}
     >
       {pending ? <SpinnerMini /> : text}
     </button>
