@@ -1,4 +1,5 @@
 import React from "react";
+import CheckMark from "../_components/check-mark";
 
 function Pricing() {
   return (
@@ -37,82 +38,28 @@ function Pricing() {
 
               <ul className="mt-2 space-y-2 sm:mt-4">
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> 20 Aptitude Questions </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> 1 AptSense Account </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> Email support </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> 10 Logic Explanation </span>
                 </li>
-
-                
               </ul>
             </div>
           </div>
@@ -243,8 +190,6 @@ function Pricing() {
 
                   <span className="text-gray-700"> 24/7 Premium Support </span>
                 </li>
-
-                
               </ul>
             </div>
           </div>
@@ -281,142 +226,57 @@ function Pricing() {
 
               <ul className="mt-2 space-y-2 sm:mt-4">
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
-                  <span className="text-gray-700"> Unlimited Aptitude Questions </span>
+                  <span className="text-gray-700">
+                    {" "}
+                    Unlimited Aptitude Questions{" "}
+                  </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
-                  <span className="text-gray-700"> Unlimited APtSense Account </span>
+                  <span className="text-gray-700">
+                    {" "}
+                    Unlimited APtSense Account{" "}
+                  </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
-                  <span className="text-gray-700"> Unlimited APtSense Account </span>
+                  <span className="text-gray-700">
+                    {" "}
+                    Unlimited APtSense Account{" "}
+                  </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> Email Support </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
-                  <span className="text-gray-700"> Unlimited Logic Explanation </span>
+                  <span className="text-gray-700">
+                    {" "}
+                    Unlimited Logic Explanation{" "}
+                  </span>
                 </li>
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> Advance Security </span>
                 </li>
 
                 <li className="flex items-center gap-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-5 text-indigo-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckMark />
 
                   <span className="text-gray-700"> Invoice and billing </span>
                 </li>
-
-                
-
-                
-                  
-                
               </ul>
             </div>
           </div>
