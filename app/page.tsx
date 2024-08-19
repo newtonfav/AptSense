@@ -5,6 +5,7 @@ import { Jomhuria } from "next/font/google";
 
 import google from "@/public/google.png";
 import illustration from "@/public/machine-learning.png";
+import Link from "next/link";
 
 const jomhuria = Jomhuria({
   subsets: ["latin"],
@@ -31,19 +32,21 @@ const HomePage: React.FC = () => {
               .
             </span>
           </div>
-          <button
-            className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg py-2 border border-black px-8 gap-2 rounded-[0.75rem] items-center"
-            aria-label="Get Started"
-          >
-            <span className="font-semibold">Get started with</span>
-            <Image
-              src={google}
-              alt="Get Started button"
-              width={25}
-              height={25}
-              className="inline-block"
-            />
-          </button>
+          <Link href="/sigin">
+            <button
+              className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg py-2 border border-black px-8 gap-2 rounded-[0.75rem] items-center"
+              aria-label="Get Started"
+            >
+              <span className="font-semibold">Get started with</span>
+              <Image
+                src={google}
+                alt="Get Started button"
+                width={25}
+                height={25}
+                className="inline-block"
+              />
+            </button>
+          </Link>
         </div>
 
         <div className="mt-10 hidden sm:flex">
