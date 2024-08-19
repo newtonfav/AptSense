@@ -41,14 +41,15 @@ export default function Options({
     setPending(true);
 
     const formData = new FormData(e.currentTarget);
-    const selectedOption = Number(formData.get(questionId));
+    const selectedOptionUser = Number(formData.get(questionId));
 
     const response = await explainLogic(question);
     const solution = response.responseText;
 
     if (!response.success) throw new Error("Couldn't fetch solution");
 
-    submitAnswer(selectedOption, index, solution);
+    submitAnswer(selectedOptionUser, index, solution);
+
     setPending(false);
   }
 
