@@ -24,13 +24,18 @@ const HomePage: React.FC = () => {
           >
             {" "}
             AptSense
-            <span>.</span>
+            <span
+              className="animate-rotate-period inline-block"
+              style={{ transformOrigin: "center" }}
+            >
+              .
+            </span>
           </div>
           <button
             className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-100 text-lg py-2 border border-black px-8 gap-2 rounded-[0.75rem] items-center"
             aria-label="Get Started"
           >
-            <span className="font-semibold">Get Started</span>
+            <span className="font-semibold">Get started with</span>
             <Image
               src={google}
               alt="Get Started button"

@@ -61,10 +61,17 @@ const config: Config = {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(360deg)" },
         },
+        rotatePeriod: {
+          "0%, 90%, 100%": { transform: "rotate(0deg) translateX(0)" }, // Start and end still
+          "95%": {
+            transform: "rotate(100deg) translateX(20px)",
+          },
+        },
       },
       animation: {
         rotate: "rotate 1s infinite linear",
         "spin-slow": "spin-slow 12s linear infinite",
+        "rotate-period": "rotatePeriod 5s ease-in-out infinite",
       },
     },
   },
