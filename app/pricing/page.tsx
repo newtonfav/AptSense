@@ -8,7 +8,7 @@ function Pricing() {
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:items-stretch md:grid-cols-3 md:gap-5 ">
           <div className="divide-y bg-white divide-gray-200 rounded-2xl border shadow-xl border-gray-200 ">
             <div className="p-6 sm:px-8 shadow-lg">
-              <h2 className="text-5xl text-center font-black text-gray-900">
+              <h2 className="text-5xl text-center font-medium text-gray-900">
                 Free
                 <span className="sr-only">Plan</span>
               </h2>
@@ -67,7 +67,7 @@ function Pricing() {
           {/* Pro Card */}
           <div className="divide-y bg-gradient-to-t from-green-400 to-blue-400 divide-gray-200 rounded-2xl border border-indigo-600 shadow-xl transform scale-105">
             <div className="p-8 sm:px-12">
-              <h2 className="text-6xl text-center font-black text-gray-900">
+              <h2 className="text-6xl text-center font-medium text-gray-900">
                 Pro
                 <span className="sr-only">Plan</span>
               </h2>
@@ -196,7 +196,7 @@ function Pricing() {
 
           <div className="divide-y bg-white divide-gray-200 rounded-2xl border border-gray-200 shadow-xl">
             <div className="p-6 sm:px-8">
-              <h2 className="text-5xl text-center font-black text-gray-900">
+              <h2 className="text-5xl text-center font-medium text-gray-900">
                 Enterprise
                 <span className="sr-only">Plan</span>
               </h2>
