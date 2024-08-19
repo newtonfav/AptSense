@@ -10,10 +10,11 @@ import Link from "next/link";
 
 export default async function Navigation() {
   const { userId } = auth();
-  // if(!userId )
-  // {
-  //   return <div>You are logged in</div>
-  // }
+  const user = await currentUser(); 
+  if(!userId )
+  {
+    return <div>You are logged in</div>
+  }
 
   return (
     <nav className="z-10 relative">
@@ -30,7 +31,7 @@ export default async function Navigation() {
           </Link>
         </li>
         <li className="midPhone:mb-2">
-          <Link href="/" className="hover:text-accent-400 transition-colors">
+          <Link href="/pricing" className="hover:text-accent-400 transition-colors">
             Pricing
           </Link>
         </li>
@@ -44,9 +45,7 @@ export default async function Navigation() {
         </li>
         <li className="midPhone:mb-2 items-center">
           {userId ? (
-            <div>
-              <UserButton />
-            </div> // Render Profile button
+            <div><UserButton  /></div> // Render Profile button
           ) : (
             <SignInButton /> // Render Login button
           )}

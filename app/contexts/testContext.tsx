@@ -1,5 +1,4 @@
 import {
-  act,
   createContext,
   Dispatch,
   ReactNode,
@@ -101,7 +100,6 @@ function reducer(state: InitialState, action: Action): InitialState {
         status: "active",
         isAnswered: false,
         timerIsPaused: false,
-        isFlipped: false,
         secondsRemaining: SECS_PER_QUESTIONS,
       };
 
