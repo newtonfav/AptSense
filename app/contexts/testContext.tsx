@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import {
   createContext,
   Dispatch,
@@ -54,7 +53,7 @@ const initialState: InitialState = {
   isLoading: false,
   status: "loading", //ready, active, error, finished, loading
   index: 0,
-  answer: 0,
+  answer: null,
   numQuestions: 0,
   timerIsPaused: false,
   isFlipped: false,
@@ -68,7 +67,7 @@ const initialState: InitialState = {
   secondsRemaining: null,
 };
 
-const SECS_PER_QUESTIONS = 30;
+const SECS_PER_QUESTIONS = 60;
 
 function reducer(state: InitialState, action: Action): InitialState {
   switch (action.type) {
@@ -101,7 +100,7 @@ function reducer(state: InitialState, action: Action): InitialState {
         status: "active",
         isAnswered: false,
         timerIsPaused: false,
-        secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
+        secondsRemaining: SECS_PER_QUESTIONS,
       };
 
     case "question/newAnswer":
@@ -109,7 +108,7 @@ function reducer(state: InitialState, action: Action): InitialState {
 
       return {
         ...state,
-        answer: action.payload,
+        answer: action.payload.selectedOption,
         points:
           action.payload.selectedOption === question.correctOption
             ? state.points + question.points
@@ -118,6 +117,9 @@ function reducer(state: InitialState, action: Action): InitialState {
         timerIsPaused: true,
         solution: action.payload.solution,
       };
+
+    case "question/newOption":
+      return { ...state, answer: action.payload };
 
     case "question/feedback":
       return { ...state, isFlipped: true };
@@ -130,11 +132,16 @@ function reducer(state: InitialState, action: Action): InitialState {
         isAnswered: false,
         timerIsPaused: false,
         isFlipped: false,
-        secondsRemaining: state.questions.length * SECS_PER_QUESTIONS,
+        secondsRemaining: SECS_PER_QUESTIONS,
       };
 
     case "question/prev":
-      return { ...state, index: state.index - 1, answer: null };
+      return {
+        ...state,
+        index: state.index - 1,
+        answer: null,
+        isAnswered: true,
+      };
 
     case "finish":
       return {
@@ -245,7 +252,7 @@ function TestProvider({ children }: { children: ReactNode }) {
       secondsRemaining,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [secondsRemaining, dispatch, status, isFlipped]
+    [secondsRemaining, dispatch, status, isAnswered, index, isFlipped]
   );
 
   return <TestContext.Provider value={value}>{children}</TestContext.Provider>;

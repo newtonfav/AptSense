@@ -20,12 +20,17 @@ import { google } from "@ai-sdk/google";
 export async function explainLogic(question: {
   fullQuestion: any;
   task: string;
+  correctOption: number;
 }) {
   const questionImage = question.fullQuestion;
 
+  const options = ["A", "B", "C", "D"];
+  const correctAnswer = question.correctOption;
+
   if (!questionImage) throw new Error("No file upload");
 
-  const prompt = `${question.task}, provide a detailed explanation at atmost 600 characters`;
+  const prompt = `${question.task}, Explain why the correct solution is ${options[correctAnswer]}. 
+  Provide a detailed explanation at atmost 600 characters`;
 
   const result = await generateText({
     model: google("models/gemini-1.5-flash"),

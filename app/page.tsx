@@ -12,6 +12,7 @@ const quicksand = Quicksand({
   weight: '300',
 });
 
+<<<<<<< HEAD
 const jomhuria = Jomhuria({
     subsets: ["latin"],
     weight: "400"
@@ -39,6 +40,14 @@ const QuicksandText = styled.h2`
 
 interface BoxProps {
   bgColor?: string;
+=======
+export default function Home() {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+>>>>>>> bbfb7d63bb984ea4d4b37c154bb0cbd54a5e551e
 }
 
 const Box = styled.div<BoxProps>`

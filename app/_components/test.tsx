@@ -8,15 +8,23 @@ import { useEffect, useState } from "react";
 export default function Test() {
   const [isPrevDisabled, setIsPrevDisabled] = useState(false);
   const [isNextDisabled, setIsNextDisabled] = useState(false);
-  const { dispatch, index, questions } = useTest();
+  const { dispatch, index, questions, isAnswered } = useTest();
 
   useEffect(() => {
-    // Disable previous button if the index is 0 (first question)
-    setIsPrevDisabled(index === 0);
+    // Disable previous button if the index is 0 (first question) or if the question is not answered
+    if (index === 0 || !isAnswered) {
+      setIsPrevDisabled(true);
+    } else {
+      setIsPrevDisabled(false);
+    }
 
-    // Disable next button if the index is the last question
-    setIsNextDisabled(index === questions.length - 1);
-  }, [index, questions.length]);
+    // Disable next button if the index is the last question or if the question is not answered
+    if (index === questions.length - 1 || !isAnswered) {
+      setIsNextDisabled(true);
+    } else {
+      setIsNextDisabled(false);
+    }
+  }, [index, isAnswered, questions.length]);
 
   return (
     <div>

@@ -1,6 +1,21 @@
+import {
+  SignInButton,
+  SignOutButton,
+  UserButton,
+  UserProfile,
+  useUser,
+} from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 
 export default async function Navigation() {
+  const { userId } = auth();
+  const user = await currentUser(); 
+  if(!userId )
+  {
+    return <div>You are logged in</div>
+  }
+
   return (
     <nav className="z-10 relative">
       <ul
@@ -16,7 +31,7 @@ export default async function Navigation() {
           </Link>
         </li>
         <li className="midPhone:mb-2">
-          <Link href="/" className="hover:text-accent-400 transition-colors">
+          <Link href="/pricing" className="hover:text-accent-400 transition-colors">
             Pricing
           </Link>
         </li>
@@ -28,13 +43,12 @@ export default async function Navigation() {
             About
           </Link>
         </li>
-        <li className="midPhone:mb-2">
-          <Link
-            href="/login"
-            className="hover:text-accent-400 transition-colors"
-          >
-            Login
-          </Link>
+        <li className="midPhone:mb-2 items-center">
+          {userId ? (
+            <div><UserButton  /></div> // Render Profile button
+          ) : (
+            <SignInButton /> // Render Login button
+          )}
         </li>
       </ul>
     </nav>
