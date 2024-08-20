@@ -15,7 +15,10 @@ const jomhuria = Jomhuria({
 const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen w-full">
-      <section id="login" className="flex items-center justify-center w-full">
+      <section
+        id="login"
+        className="flex items-center justify-center midPhone:flex-col-reverse w-full"
+      >
         <div className="flex flex-col items-center">
           <h2 className="text-lg font-normal mb-2 self-start text-center">
             Ace your aptitude examinations with
@@ -49,7 +52,7 @@ const HomePage: React.FC = () => {
           </Link>
         </div>
 
-        <div className="mt-10 hidden sm:flex">
+        <div className="mt-10">
           <Image
             src={illustration}
             alt="AptSense Robot"

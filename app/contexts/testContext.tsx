@@ -1,3 +1,4 @@
+import { stat } from "fs";
 import {
   createContext,
   Dispatch,
@@ -16,6 +17,7 @@ interface InitialState {
   isLoading: boolean;
   error: string;
   maxPoints: number;
+  isCorrect: boolean;
   isFlipped: boolean;
   solution: string;
   isAnswered: boolean;
@@ -58,6 +60,7 @@ const initialState: InitialState = {
   timerIsPaused: false,
   isFlipped: false,
   maxPoints: 0,
+  isCorrect: false,
   isAnswered: false,
   solution: "",
   points: 0,
@@ -99,9 +102,13 @@ function reducer(state: InitialState, action: Action): InitialState {
         ...state,
         status: "active",
         isAnswered: false,
+        isCorrect: false,
         timerIsPaused: false,
         secondsRemaining: SECS_PER_QUESTIONS,
       };
+
+    case "question/timerPaused":
+      return { ...state, timerIsPaused: true };
 
     case "question/newAnswer":
       const question = state.questions.at(state.index);
@@ -114,7 +121,7 @@ function reducer(state: InitialState, action: Action): InitialState {
             ? state.points + question.points
             : state.points,
         isAnswered: true,
-        timerIsPaused: true,
+        isCorrect: action.payload.selectedOption === question.correctOption,
         solution: action.payload.solution,
       };
 
@@ -187,6 +194,7 @@ function TestProvider({ children }: { children: ReactNode }) {
       answer,
       solution,
       maxPoints,
+      isCorrect,
       isAnswered,
       isFlipped,
       timerIsPaused,
@@ -200,7 +208,7 @@ function TestProvider({ children }: { children: ReactNode }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const [isCorrect, setIsCorrect] = useState(false);
+  // const [isCorrect, setIsCorrect] = useState(false);
 
   function startTest(data: any) {
     dispatch({ type: "question/loaded", payload: data });
@@ -213,9 +221,9 @@ function TestProvider({ children }: { children: ReactNode }) {
   ) {
     const currentQuestion = questions[index];
 
-    if (currentQuestion.correctOption === selectedOption) {
-      setIsCorrect(true);
-    }
+    // if (currentQuestion.correctOption === selectedOption) {
+    //   setIsCorrect(true);
+    // }
 
     dispatch({
       type: "question/newAnswer",

@@ -28,7 +28,7 @@ export default function Test() {
 
   return (
     <div>
-      <div className="justify-center flex items-center h-[75dvh] space-x-12">
+      <div className="justify-center flex items-center h-[78dvh] space-x-12">
         <button
           onClick={() => dispatch({ type: "question/prev" })}
           disabled={isPrevDisabled}

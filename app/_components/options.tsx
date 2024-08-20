@@ -40,8 +40,12 @@ export default function Options({
     e.preventDefault();
     setPending(true);
 
+    dispatch({ type: "question/timerPaused" });
+
     const formData = new FormData(e.currentTarget);
     const selectedOptionUser = Number(formData.get(questionId));
+
+    console.log(selectedOptionUser);
 
     const response = await explainLogic(question);
     const solution = response.responseText;
