@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
               .
             </span>
           </div>
-          <Link href="/sigin">
+          <Link href="/">
             <button
               className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg py-2 border border-black px-8 gap-2 rounded-[0.75rem] items-center"
               aria-label="Get Started"
