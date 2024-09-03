@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function CheckMark({ pro }: { pro?: string }) {
+export default function CheckMark({ premium }: { premium?: boolean }) {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth="2"
+        strokeWidth="4"
         stroke="currentColor"
-        className={`size-5  ${pro ? "text-white" : "text-black"}`}
+        className={`size-4  ${premium ? "text-white" : "text-black"}`}
       >
         <path
           strokeLinecap="round"
