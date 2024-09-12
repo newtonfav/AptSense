@@ -14,17 +14,17 @@ const jomhuria = Jomhuria({
 
 const HomePage: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen w-full">
-      <section
+    <div className="flex flex-col h-[70dvh] justify-center w-full">
+      <div
         id="login"
-        className="flex items-center justify-center midPhone:flex-col-reverse w-full"
+        className="flex items-center justify-center tabletPortrait:flex-col-reverse tabletPortrait:gap-8 w-full"
       >
         <div className="flex flex-col items-center">
-          <h2 className="text-lg font-normal mb-2 self-start text-center">
+          <h2 className="text-lg font-normal mb-2 midPhone:text-xs tabletMedium:text-sm self-start text-center">
             Ace your aptitude examinations with
           </h2>
           <div
-            className={`${jomhuria.className} aptsense font-bold text- text-[14rem] -my-24 text-primary-400 `}
+            className={`${jomhuria.className} aptsense font-bold text-[14rem] tabletLandscape:text-[12rem] tabletMedium:text-[10rem] tabletPortrait:text-[9rem] midPhone:text-[7rem] midPhone:-my-12 tabletMedium:-my-16 -my-24 text-primary-400`}
           >
             {" "}
             AptSense
@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
           </div>
           <Link href="/">
             <button
-              className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg py-2 border border-black px-8 gap-2 rounded-[0.75rem] items-center"
+              className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg tabletMedium:text-sm py-2 border border-black px-8 gap-2 midPhone:px-3 midPhone:py-[0.4rem] rounded-[0.75rem] items-center"
               aria-label="Get Started"
             >
               <span className="font-semibold">Get started with</span>
@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
                 alt="Get Started button"
                 width={25}
                 height={25}
-                className="inline-block"
+                className="inline-block midPhone:w-[1.3rem]"
               />
             </button>
           </Link>
@@ -59,9 +59,10 @@ const HomePage: React.FC = () => {
             width={500}
             height={500}
             quality={100}
+            className="tabletLandscape:w-[25rem] tabletMedium:w-[20rem]"
           />
         </div>
-      </section>
+      </div>
     </div>
   );
 };

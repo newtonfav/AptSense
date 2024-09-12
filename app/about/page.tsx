@@ -2,7 +2,10 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="mx-auto px-6">
+    <div className="mx-auto px-10 my-8">
+      <h2 className="text-3xl text-primary-600 font-bold mb-4">
+        Welcome to AptSense
+      </h2>
       AptSense is a cutting-edge, AI-powered application created with the
       primary goal of empowering students to succeed in their aptitude
       examinations. By leveraging advanced machine learning algorithms, AptSense

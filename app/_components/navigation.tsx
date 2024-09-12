@@ -5,7 +5,7 @@ export default async function Navigation() {
     <nav className="z-10 relative">
       <ul
         id="nav-items"
-        className="md:flex gap-10 transition-all duration-500 items-center md:static absolute left-0 bg-white midPhone:text-[1rem] midPhone:text-primary-700 midPhone:-left-[6rem] midPhone:h-[8rem] md:bg-transparent md:w-auto hidden midPhone:p-3"
+        className="xl:flex gap-10 transition-all duration-500 items-center md:static absolute left-0 bg-white midPhone:text-[1rem] midPhone:text-primary-700 midPhone:-left-[6rem] midPhone:h-[8rem] md:bg-transparent md:w-auto hidden midPhone:p-3"
       >
         <li className="midPhone:mb-2">
           <Link
