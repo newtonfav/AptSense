@@ -64,7 +64,7 @@ export default function Options({
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="items-center flex flex-col">
-        <div className="inline-flex gap-4 mb-12">
+        <div className="inline-flex midPhone:flex-col gap-4 mb-12">
           {options.map((option, index) => (
             <Option
               image={option.image}
