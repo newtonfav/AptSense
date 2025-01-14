@@ -10,7 +10,7 @@ function NotFound() {
         href="/"
         className="inline-block bg-accent-500 text-primary-800 px-6 py-3 text-lg midPhone:px-3 midPhone:py-2"
       >
-        Go back home
+        Go back
       </Link>
     </main>
   );
