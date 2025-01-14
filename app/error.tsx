@@ -13,7 +13,7 @@ export default function Error({ error, reset }: any) {
       )}
 
       <button
-        className="inline-block bg-primary-500 text-primary-800 px-6 py-3 text-lg"
+        className="inline-block bg-primary-500 text-white px-6 py-3 text-lg"
         onClick={reset}
       >
         Try again
