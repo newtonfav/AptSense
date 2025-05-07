@@ -12,7 +12,7 @@ export default function Solution() {
   // const options = ["A", "B", "C", "D"];
 
   return (
-    <div className="text-wrap text-sm flex flex-col w-[33rem] h-[12rem]">
+    <div className="text-wrap text-sm flex flex-col w-10/12 sm:w-[33rem] h-[12rem]">
       <div className="font-semibold text-base">Explanation</div>
       <MemoizedReactMarkdown remarkPlugins={[remarkGfm, remarkMath]}>
         {solution}

@@ -28,7 +28,7 @@ export default function Test() {
 
   return (
     <div>
-      <div className="justify-center flex items-center h-[78dvh] space-x-12">
+      <div className="justify-center flex items-center h-[78dvh] space-x-3 sm:space-x-12">
         <button
           onClick={() => dispatch({ type: "question/prev" })}
           disabled={isPrevDisabled}
@@ -38,7 +38,7 @@ export default function Test() {
               : ""
           }`}
         >
-          <ChevronLeftIcon className="size-20" />
+          <ChevronLeftIcon className="size-10 sm:size-20" />
         </button>
 
         <TestComponent />
@@ -52,7 +52,7 @@ export default function Test() {
               : ""
           }`}
         >
-          <ChevronRightIcon className="size-20" />
+          <ChevronRightIcon className="size-10 sm:size-20" />
         </button>
       </div>
     </div>

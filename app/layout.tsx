@@ -29,7 +29,7 @@ export default function RootLayout({
         <ClerkProvider>
           <Header />
 
-          <div className="flex-1 px-4 py-4 grid">
+          <div className="flex-1 px-2 sm:px-4 py-4 grid">
             <main className="mx-auto w-full max-w-7xl overflow-x-hidden">
               {children}
             </main>

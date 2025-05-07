@@ -15,9 +15,9 @@ export default function TestCard({ questions, index }: TestCardProps) {
   const { isFlipped } = useTest();
 
   return (
-    <div className="bg-primary-200 p-10 rounded-[0.75rem] min-w-min space-y-4 flex flex-col items-center select-none mb-8">
+    <div className="bg-primary-200 p-3 sm:p-10 rounded-[0.75rem] min-w-min space-y-4 flex flex-col items-center select-none mb-8">
       <div>{question.task}</div>
-      <div className="inline-flex gap-4 items-center">
+      <div className="flex flex-col sm:flex-row gap-4 items-center">
         <Image
           src={question.image}
           alt={"aptitude image"}
