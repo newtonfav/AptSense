@@ -32,7 +32,7 @@ export default function StartTest({ questions }: StartTestProp) {
         <Test />
       ) : (
         <div>
-          <div className="   justify-center h-[75dvh] space-x-12  flex flex-col items-center select-none mb-8">
+          <div className="justify-center h-[75dvh] space-x-12  flex flex-col items-center select-none mb-8">
             <div className="bg-primary-200 rounded-[0.75rem] text-center p-20 text-base space-y-4">
               {status === "finished" ? (
                 <FinishedScreen />

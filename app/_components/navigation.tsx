@@ -31,7 +31,6 @@ export default async function Navigation() {
             About
           </Link>
         </li>
-        <li className="midPhone:mb-2 items-center">Login</li>
       </ul>
     </nav>
   );

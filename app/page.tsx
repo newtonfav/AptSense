@@ -35,19 +35,12 @@ const HomePage: React.FC = () => {
               .
             </span>
           </div>
-          <Link href="/">
+          <Link href="/test">
             <button
               className="w-auto -mt-3 bg-primary-400 inline-flex text-primary-50 text-lg tabletMedium:text-sm py-2 border border-black px-8 gap-2 midPhone:px-3 midPhone:py-[0.4rem] rounded-[0.75rem] items-center"
               aria-label="Get Started"
             >
-              <span className="font-semibold">Get started with</span>
-              <Image
-                src={google}
-                alt="Get Started button"
-                width={25}
-                height={25}
-                className="inline-block midPhone:w-[1.3rem]"
-              />
+              <span className="font-semibold">Get started</span>
             </button>
           </Link>
         </div>

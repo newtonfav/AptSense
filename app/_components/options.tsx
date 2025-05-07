@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useTest } from "../contexts/testContext";
 import { useActions } from "ai/rsc";
 import SpinnerMini from "./spinner-mini";
+import { convertToBase64 } from "../helpers/convertToBase64";
 
 interface OptionsProps {
   options: any[];
@@ -46,6 +47,7 @@ export default function Options({
     const selectedOptionUser = Number(formData.get(questionId));
 
     const response = await explainLogic(question);
+
     const solution = response.responseText;
 
     if (!response.success) throw new Error("Couldn't fetch solution");

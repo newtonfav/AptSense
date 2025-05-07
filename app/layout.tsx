@@ -13,12 +13,7 @@ export const metadata: Metadata = {
     default: "AptSense",
   },
   description: "Ace your aptitude examinations with AptSense.",
-  authors: [
-    { name: "Favour Oghenekowho", url: "https://newtonfav.xyz" },
-    { name: "Rohit", url: "" },
-    { name: "Bhoomika", url: "" },
-    { name: "Swaytha", url: "" },
-  ],
+  authors: [{ name: "Favour Oghenekowho", url: "https://newtonfav.xyz" }],
 };
 
 export default function RootLayout({
@@ -33,7 +28,7 @@ export default function RootLayout({
       >
         <ClerkProvider>
           <Header />
-          
+
           <div className="flex-1 px-4 py-4 grid">
             <main className="mx-auto w-full max-w-7xl overflow-x-hidden">
               {children}
