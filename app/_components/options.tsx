@@ -171,7 +171,7 @@ function Feedback({
   handleClick: (e: any) => void;
 }) {
   return (
-    <div className="inline-flex items-baseline gap-6">
+    <div className="flex sm:flex-row flex-col items-center sm:items-baseline gap-2 sm:gap-6">
       {isCorrect ? <div>Correct 🎉</div> : <div>Wrong ❌</div>}
       <Button
         text="View Explanation"
