@@ -15,14 +15,14 @@ export default async function Navigation() {
             Aptitude Tests
           </Link>
         </li>
-        <li className="midPhone:mb-2">
+        {/* <li className="midPhone:mb-2">
           <Link
             href="/pricing"
             className="hover:text-accent-400 transition-colors"
           >
             Pricing
           </Link>
-        </li>
+        </li> */}
         <li className="midPhone:mb-2">
           <Link
             href="/about"
